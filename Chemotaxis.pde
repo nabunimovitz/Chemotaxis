@@ -1,4 +1,5 @@
  Bacteria [] colony;
+ boolean isAlive = true;
  void setup()   
  {     
  	size(500,500);   
@@ -17,7 +18,15 @@
  		colony[i].show();
  	}
 
- }  
+ } 
+ void mousePressed()
+ {
+ 	for(int i=0; i<colony.length; i++)
+ 		colony[i].jump();
+
+ 	isAlive = !isAlive;
+ }
+
  class Bacteria    
  {     
  	int myX, myY, myColor;
@@ -36,20 +45,29 @@
  	void move()
  	{
  		if(mouseX < myX)
- 			myX = myX+(int)(Math.random()*10)-6;
+ 			myX = myX+(int)(Math.random()*3)-2;
  		else
- 			myX = myX+(int)(Math.random()*10)+6;
+ 			myX = myX+(int)(Math.random()*3)+2;
 
  		if(mouseY < myY)
- 			myY = myY+(int)(Math.random()*10)-6;
+ 			myY = myY+(int)(Math.random()*3)-2;
  		else
- 			myY = myY+(int)(Math.random()*10)+6;
- 		//add if mouseX= mouse Y ?
+ 			myY = myY+(int)(Math.random()*3)+2;
+ 	}
+
+ 	void jump()
+ 	{
+ 		myX = (int)(Math.random()*500);
+ 		myY = (int)(Math.random()*500);
+ 		//myColor = (255);
  	}
 
  	void show()
  	{
- 		fill(myColor);
+ 		if(isAlive==true)
+ 			fill(myColor);
+ 		else  
+ 			fill(255);
  		ellipse(myX,myY,10,10);
  	}
  }    
